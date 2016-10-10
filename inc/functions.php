@@ -192,7 +192,7 @@ function isAuthenticated() {
 
 function requireAuth() {
     if(!isAuthenticated()) {
-        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', 'php-auth.dev');
+        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', getenv('COOKIE_DOMAIN'));
         redirect('/login.php', ['cookies' => [$accessToken]]);
     }
 
@@ -204,7 +204,7 @@ function requireAuth() {
             ['HS256']
         );
     } catch (\Exception $e) {
-        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', 'php-auth.dev');
+        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', getenv('COOKIE_DOMAIN'));
         redirect('/login.php', ['cookies' => [$accessToken]]);
     }
 
@@ -231,7 +231,7 @@ function isAdmin() {
 
 function requireAdmin() {
     if(!isAuthenticated()) {
-        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', 'php-auth.dev');
+        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', getenv('COOKIE_DOMAIN'));
         redirect('/login.php', ['cookies' => [$accessToken]]);
     }
 
@@ -244,7 +244,7 @@ function requireAdmin() {
             ['HS256']
         );
     } catch (\Exception $e) {
-        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', 'php-auth.dev');
+        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', getenv('COOKIE_DOMAIN'));
         redirect('/login.php', ['cookies' => [$accessToken]]);
         exit;
     }
@@ -266,7 +266,7 @@ function user($item = null) {
             ['HS256']
         );
     } catch (\Exception $e) {
-        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', 'php-auth.dev');
+        $accessToken = new Cookie("access_token", 'EXPIRED', time()-3600, '/', getenv('COOKIE_DOMAIN'));
         redirect('/login.php', ['cookies' => [$accessToken]]);
         exit;
     }

@@ -45,7 +45,7 @@ $jwt = \Firebase\JWT\JWT::encode([
 
 // Store JWT in cookie
 $response = Response::create('', Response::HTTP_FOUND, ['Location' => '/']);
-$accessToken = new Cookie("access_token", $jwt, $expTime, '/', 'php-auth.dev');
+$accessToken = new Cookie("access_token", $jwt, $expTime, '/', getenv('COOKIE_DOMAIN'));
 $response->headers->setCookie($accessToken);
 
 // Send to index page
