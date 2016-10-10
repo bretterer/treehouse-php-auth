@@ -1,0 +1,25 @@
+{
+    "name": "bretterer/php-auth",
+    "description": "PHP Authentication Course for Treehouse",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brian Retterer",
+            "email": "brian@brianretterer.com"
+        }
+    ],
+    "require": {
+        "symfony/http-foundation": "3.1.*",
+        "vlucas/phpdotenv": "^2.4",
+        "firebase/php-jwt": "^4.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.1"
+    },
+    "autoload": {
+        "files": [
+            "inc/functions.php"
+        ]
+    }
+}
