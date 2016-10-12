@@ -7,7 +7,8 @@ requireAuth();
 $book = getBook(request()->get('bookId'));
 if(accessToken('sub') == $book['owner_id'] || isAdmin()) {
     deleteBook($book['id']);
-    redirect('/');
+    $session->getFlashBag()->add('success', 'Book "' . $book['name'] . '" deleted!');
+    redirect('/books.php');
 }
 
 redirect('/unauthorized.php');

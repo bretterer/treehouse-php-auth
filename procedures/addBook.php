@@ -11,10 +11,9 @@ $bookDescription = request()->get('description');
 
 try {
     $newBook = addBook($bookTitle, $bookDescription);
-    $response = Response::create(null, Response::HTTP_FOUND, ['Location' => '/']);
-    $response->send();
+    $session->getFlashBag()->add('success', 'Book "' . $bookTitle . '" added!');
+    redirect('/books.php');
 } catch ( \Exception $e ) {
-    $response = Response::create(null, Response::HTTP_FOUND, ['Location' => '/add.php']);
-    $response->send();
+    redirect('/add.php');
 }
 

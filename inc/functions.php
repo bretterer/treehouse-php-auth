@@ -24,40 +24,38 @@ function redirect($path, $extra = []) {
     exit;
 }
 
-function display_errors() {
-    global $session;
-
-    if(!$session->getFlashBag()->has('error')) {
-        return;
-    }
-
-    $errors = $session->getFlashBag()->get('error');
-
-    $response = '<ul>';
-    foreach($errors as $error ) {
-        $response .= "<li>{$error}</li>";
-    }
-    $response .= '</ul>';
-
-    return $response;
-}
-
-function display_success() {
-    global $session;
-
-    if(!$session->getFlashBag()->has('success')) {
-        return;
-    }
-
-    $messages = $session->getFlashBag()->get('success');
-
-    $response = '<div class="alert alert-success alert-dismissable">';
+function display_alerts($level, $messages = []) {
+    $response = '<div class="alert alert-'.$level.' alert-dismissable">';
     foreach($messages as $message ) {
-        $response .= "<strong>SUCCESS! </strong> {$message}";
+        $response .= "{$message}<br>";
     }
     $response .= '</div>';
 
     return $response;
+}
+
+function display_errors($bag = 'error') {
+    global $session;
+
+    if(!$session->getFlashBag()->has($bag)) {
+        return;
+    }
+
+    $messages = $session->getFlashBag()->get($bag);
+
+    return display_alerts('danger', $messages);
+}
+
+function display_success($bag = 'success') {
+    global $session;
+
+    if(!$session->getFlashBag()->has($bag)) {
+        return;
+    }
+
+    $messages = $session->getFlashBag()->get($bag);
+
+    return display_alerts('success', $messages);
 }
 
 function addBook($title, $description) {
@@ -65,6 +63,19 @@ function addBook($title, $description) {
     $id = accessToken('sub');
     try {
         $stmt = $db->prepare("INSERT INTO books (name, description, owner_id) VALUES (:name, :description, :id)");
+        $stmt->bindParam(':name', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    } catch ( \Exception $e ) {
+        throw $e;
+    }
+}
+
+function updateBook($id, $title, $description) {
+    global $db;
+    try {
+        $stmt = $db->prepare("UPDATE books SET name=:name, description=:description WHERE id = :id");
         $stmt->bindParam(':name', $title);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':id', $id);

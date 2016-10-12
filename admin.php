@@ -13,6 +13,9 @@ $users = getAllUsers();
 
     <div class="container">
         <div class="well">
+
+            <?php print display_errors(); ?>
+            <?php print display_success(); ?>
             <h2>Admin</h2>
 
             <div class="panel">
