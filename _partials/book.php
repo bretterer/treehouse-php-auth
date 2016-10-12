@@ -16,7 +16,7 @@
         <p><?php echo $book['description']; ?></p>
         <p>
             <?php if(isAdmin() || $book['owner_id'] == accessToken('sub')) : ?>
-                <span><a href="/edit_book.php?bookId=<?php echo $book['id']; ?>">Edit</a></span>
+                <span><a href="/edit_book.php?bookId=<?php echo $book['id']; ?>">Edit</a> | </span>
                 <span><a href="/procedures/deleteBook.php?bookId=<?php echo $book['id']; ?>">Delete</a></span>
             <?php endif; ?>
         </p>
