@@ -48,7 +48,7 @@ From this point on, you can do all administrator changes from the web applicatio
 ## Working Example
 
 I have set up a domain for a working example of this.  It can be viewed at 
-[teamtreehousephpauth.brianretterer.com]()
+[http://teamtreehousephpauth.brianretterer.com](http://teamtreehousephpauth.brianretterer.com)
 
 Please feel free to register and create books.
 
