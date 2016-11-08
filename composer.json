@@ -1,0 +1,15 @@
+{
+    "name": "bretterer/php-auth",
+    "description": "PHP User Authentication Treehouse Course",
+    "type": "project",
+    "require": {
+        "symfony/http-foundation": "3.1.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brian Retterer",
+            "email": "brian@brianretterer.com"
+        }
+    ]
+}
