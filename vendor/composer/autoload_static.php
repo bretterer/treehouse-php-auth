@@ -17,15 +17,6 @@ class ComposerStaticInitbdc76df20dc1f29b18d76d99324d33f8
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\VarDumper\\' => 28,
-            'Symfony\\Component\\HttpFoundation\\' => 33,
-        ),
-        'F' => 
-        array (
-            'Firebase\\JWT\\' => 13,
-        ),
-        'D' => 
-        array (
-            'Dotenv\\' => 7,
         ),
     );
 
@@ -37,18 +28,6 @@ class ComposerStaticInitbdc76df20dc1f29b18d76d99324d33f8
         'Symfony\\Component\\VarDumper\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
-        ),
-        'Symfony\\Component\\HttpFoundation\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/http-foundation',
-        ),
-        'Firebase\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
-        ),
-        'Dotenv\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
     );
 

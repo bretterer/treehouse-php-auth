@@ -10,12 +10,9 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": "3.1.*",
-        "vlucas/phpdotenv": "^2.4",
-        "firebase/php-jwt": "^4.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.1"
+        "symfony/var-dumper": "3.1.6"
     },
     "autoload": {
         "files": [
