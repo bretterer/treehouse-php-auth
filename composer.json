@@ -12,11 +12,5 @@
     "require": {
     },
     "require-dev": {
-        "symfony/var-dumper": "3.1.6"
-    },
-    "autoload": {
-        "files": [
-            "inc/functions.php"
-        ]
     }
 }
