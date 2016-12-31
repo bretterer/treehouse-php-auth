@@ -1,11 +1,11 @@
 <div class="media">
     <div class="media-left">
         <div class="btn-group-vertical" role="group">
-            <a href="/procedures/vote.php?bookId=<?php echo $book['id']; ?>&vote=up&clearOnly=<?php if($book['myVote'] == 1) : ?>true<?php else : ?>false<?php endif; ?>">
+            <a href="/procedures/vote.php?bookId=<?php echo $book['id']; ?>&vote=up">
                 <span class="glyphicon glyphicon-triangle-top" <?php if($book['myVote'] == 1) : ?>style="color: orange;" <?php endif; ?> aria-hidden="true"></span>
             </a>
             <span><?php echo $book['score'] ? : '0'; ?></span>
-            <a href="/procedures/vote.php?bookId=<?php echo $book['id']; ?>&vote=down&clearOnly=<?php if($book['myVote'] == -1) : ?>true<?php else : ?>false<?php endif; ?>">
+            <a href="/procedures/vote.php?bookId=<?php echo $book['id']; ?>&vote=down">
                 <span class="glyphicon glyphicon-triangle-bottom" <?php if($book['myVote'] == -1) : ?>style="color: orange;" <?php endif; ?> aria-hidden="true"></span>
             </a>
         </div>

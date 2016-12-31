@@ -117,7 +117,19 @@ function getAllBooks() {
     if(isAuthenticated()) {
         $userId = accessToken('sub');
     }
-    $query = "SELECT books.*, sum(votes.value) as score, (SELECT value FROM votes WHERE votes.book_id=books.id AND votes.user_id={$userId}) as myVote FROM books LEFT JOIN votes ON (books.id = votes.book_id) GROUP BY books.id ORDER BY score DESC";
+	$query = "SELECT books.*, 
+			sum(votes.value) as score, 
+				(SELECT value 
+				FROM votes 
+				WHERE votes.book_id=books.id 
+					AND votes.user_id={$userId}) as myVote 
+				FROM books 
+				LEFT JOIN votes ON (books.id = votes.book_id) 
+				GROUP BY books.id 
+				ORDER BY score DESC";
+
+
+	$query = "SELECT books.*, sum(votes.value) as score, (SELECT value FROM votes WHERE votes.book_id=books.id AND votes.user_id={$userId}) as myVote FROM books LEFT JOIN votes ON (books.id = votes.book_id) GROUP BY books.id ORDER BY score DESC";
     try {
         $stmt = $db->prepare($query);
         $stmt->execute();
@@ -237,7 +249,27 @@ function isAdmin() {
         return false;
     }
 
-    return $jwt->is_admin;
+    return (boolean)$jwt->is_admin;
+}
+
+function isOwner($ownerId) {
+	if(!isAuthenticated()) {
+		return false;
+	}
+
+	try {
+		\Firebase\JWT\JWT::$leeway = 1;
+		$jwt = \Firebase\JWT\JWT::decode(
+			request()->cookies->get('access_token'),
+			getenv('SECRET_KEY'),
+			['HS256']
+		);
+	} catch (\Exception $e) {
+		return false;
+	}
+
+	return $jwt->sub === $ownerId;
+
 }
 
 function requireAdmin() {
@@ -329,6 +361,19 @@ function clearVote($book) {
     }
 }
 
+function getUserVote($book) {
+	global $db;
+
+	try {
+		$stmt = $db->prepare('SELECT * FROM votes WHERE book_id = :bookId AND user_id = :userId');
+		$stmt->bindParam(':bookId', $book['id']);
+		$stmt->bindParam(':userId', decodeJWT('sub'));
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	} catch (\Exception $e) {
+	}
+}
+
 function voteUp($book) {
     global $db;
 
@@ -338,6 +383,18 @@ function voteUp($book) {
 
     } catch (\Exception $e) {
     }
+}
+
+function vote($book, $score) {
+	global $db;
+
+	try {
+		$stmt = $db->prepare('INSERT INTO votes (book_id, user_id, value) VALUES (:bookId, :userId, :score)');
+
+		$return = $stmt->execute([":bookId"=>$book['id'], ":userId"=>accessToken('sub'), ":score"=>$score]);
+	} catch (\Exception $e) {
+
+	}
 }
 
 function voteDown($book) {

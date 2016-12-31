@@ -3,7 +3,7 @@
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
-require_once __DIR__ . '/../bootstrap.php';
+require_once __DIR__ . '/../inc/bootstrap.php';
 
 
 // Confirm passwords are the same

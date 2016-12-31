@@ -1,16 +1,16 @@
 <?php
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../inc/bootstrap.php';
 
 requireAuth();
 
 $vote = request()->get('vote');
 $book = getBook(request()->get('bookId'));
-$clearOnly = request()->get('clearOnly');
 
+$currentVote = getUserVote($book);
 clearVote($book);
 
-if($clearOnly != "true") {
+if($currentVote === false) {
     switch (strtolower($vote)) {
         case 'up' :
             voteUp($book);
@@ -21,6 +21,6 @@ if($clearOnly != "true") {
     }
 }
 
-redirect('/');
+redirect('/books.php');
 
 
